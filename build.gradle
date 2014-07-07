@@ -1,5 +1,5 @@
 // Inovoke this file in a number of ways:
-// $ gradle hello      will execute assuming a file called build.gradle in in the current working directory
+// $ gradle hello      will execute assuming a file called build.gradle is in the current working directory
 // $ gradle -b build.gradle hello
 
 // for gradle help:
