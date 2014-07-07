@@ -1,17 +1,22 @@
 // Inovoke this file in a number of ways:
-// $ gradle hello      will execute assuming a file called build.gradle is in the current working directory
+// $ gradle hello      will execute the default build file, build.gradle, assuming a file called build.gradle exists in the current working directory
+//
+// to use non-default build file use:
 // $ gradle -b build.gradle hello
-
+// or
+// $ gradle -b /path/to.build.gradle hello
+//
 // for gradle help:
 // $ gradle --help
-
-
+//
 // for gradle version:
 // $ gradle --version
-
+//
 // for list of gradle tasks:
 // $ gradle tasks
 
+// for more detailed task list run with:
+// $ gradle tasks -- all
 
 task hello
 
@@ -70,4 +75,75 @@ task chao << {
 
 chao.onlyIf {
   System.properties['chao'] == 'true'
+}
+
+// Note:
+// All tasks derive from DefaultTask just like Java objects inherit from Object
+// Properties of DefaultTask:
+// didWork: A boolean property indicating whether the task completed successfully
+// enabled: A boolean property indicating whether the task will execute
+//  e.g. hello.enabled = true/false
+//  path: A string property containing the fully qualified path of a task
+//  e.g.
+task echo_my_path << {
+  println "This task's path is ${path}"
+}
+// The output from above looks like this:
+//    $ gradle -b build.gradle echo_my_path
+//    This is a configuration task...
+//    we can also nestle doFirst calls in side a task...
+//    :echo_my_path
+//    This task's path is :echo_my_path
+// The leading colon indicates that the task is located in the top-level build file
+
+// logger: A reference to the internal Gradle logger object
+task logLevel << {
+  def levels = ['DEBUG',
+                'INFO',
+                'LIFECYCLE',
+                'QUIET',
+                'WARN',
+                'ERROR']
+  levels.each { level ->
+    logging.level = level
+    def logMessage = "SETTING LogLevel=${level}"
+    logger.error logMessage
+    logger.error '-' * logMessage.size()
+    logger.debug 'DEBUG ENABLED'
+    logger.info 'INFO ENABLED'
+    logger.lifecycle 'LIFECYCLE ENABLED'
+    logger.warn 'WARN ENABLED'
+    logger.quiet 'QUIET ENABLED'
+    logger.error 'ERROR ENABLED'
+    println 'THIS IS println OUTPUT'
+    logger.error ' '
+  }
+}
+
+// logging: The logging property gives us access to the log level
+// description: The description property is just what it sounds like: a small piece of human-readable metadata to document the purpose of a task
+// e.g.
+task helloWorld(description: 'Says hello to the world') << {
+  println 'hello, world'
+}
+
+helloWorld {
+  description = 'Says hello to the world'
+}
+
+// Another way to do it
+helloWorld.description = 'Says hello to the world'
+
+// temporaryDir: The temporaryDir property returns a File object pointing to a temporary directory belonging to this build file. 
+// This directory is generally available to a task needing a temporary place in which to store intermediate results of any work, 
+// or to stage files for processing inside the task.
+
+// DYNAMIC PROPERTIES:
+// Tasks come with a set of intrinsic properties as shown above. However, its possible to assign any other properties we want to a task. 
+// A task object functions like a hash map, able to contain whatever other arbitrary property names and values we care to assign to it 
+// (as long as the names don’t collide with the built-in property names)
+// LOOKS LIKE THIS FEATURE IS BEING DEPRECATED IN gradle 2.0...
+task my_dynamic_property << {
+  blah = "my dynamic property"
+  println "property value = ${blah}"
 }
