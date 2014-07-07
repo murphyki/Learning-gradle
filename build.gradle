@@ -37,6 +37,16 @@ hello.doFirst {
   println "This is another doFirst task..."
 }
 
+hello {
+  println "we can also nestle doFirst calls in side a task..."
+  doFirst {
+    println "doFirst1"
+  }
+  
+  doFirst {
+    println "doFirst2"
+  }
+}
 hello.doLast {
   println "This is a doLast task..."
 }
@@ -50,3 +60,14 @@ hello << {
   println "using '<<' is shorthand for doLast"
 }
 
+// Invoke as:
+// $ gradle -b build.gradle chao
+// $ gradle -Dchao=true -b build.gradle chao
+
+task chao << {
+  println "chao"
+}
+
+chao.onlyIf {
+  System.properties['chao'] == 'true'
+}
