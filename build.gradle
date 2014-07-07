@@ -26,3 +26,27 @@ hello << {
 hello {
   println "This is a configuration task..."
 }
+
+hello.doFirst {
+  println "This is a doFirst task..."
+}
+
+hello.doFirst {
+  println "doFirst is additive"
+  println "each time doFirst is called, the new task goes on the top of the list"
+  println "This is another doFirst task..."
+}
+
+hello.doLast {
+  println "This is a doLast task..."
+}
+
+hello.doLast {
+  println "doLast is like doFirst"
+  println "it is additive and each time it is called it adds the task to the end of the list"
+}
+
+hello << {
+  println "using '<<' is shorthand for doLast"
+}
+
