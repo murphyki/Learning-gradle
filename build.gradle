@@ -141,7 +141,7 @@ helloWorld.description = 'Says hello to the world'
 // DYNAMIC PROPERTIES:
 // Tasks come with a set of intrinsic properties as shown above. However, its possible to assign any other properties we want to a task. 
 // A task object functions like a hash map, able to contain whatever other arbitrary property names and values we care to assign to it 
-// (as long as the names donâ€™t collide with the built-in property names)
+// (as long as the names don’t collide with the built-in property names)
 // LOOKS LIKE THIS FEATURE IS BEING DEPRECATED IN gradle 2.0...
 task my_dynamic_property << {
   blah = "my dynamic property"
