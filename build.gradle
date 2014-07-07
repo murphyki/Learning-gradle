@@ -1,0 +1,28 @@
+// Inovoke this file in a number of ways:
+// $ gradle hello      will execute assuming a file called build.gradle in in the current working directory
+// $ gradle -b build.gradle hello
+
+// for gradle help:
+// $ gradle --help
+
+
+// for gradle version:
+// $ gradle --version
+
+// for list of gradle tasks:
+// $ gradle tasks
+
+
+task hello
+
+hello << {
+  println "hello"
+}
+
+hello << {
+  println "hello again"
+}
+
+hello {
+  println "This is a configuration task..."
+}
