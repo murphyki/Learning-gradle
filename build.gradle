@@ -148,17 +148,31 @@ task my_dynamic_property << {
   println "property value = ${blah}"
 }
 
-task call_custom_task1(type: CustomTask) {
-  sql = 'CREATE DATABASE IF NOT EXISTS example'
+// CUSTOM TASKS
+// Can be defined inside the build file as follows:
+class MyCustomTask extends DefaultTask {
+  def message
 }
 
-task call_custom_task2(type: CustomTask, dependsOn: call_custom_task1) {
-  sql = "GRANT ALL PRIVILEGES ON example.* TO exampleuser@localhost IDENTIFIED BY 'passw0rd'"
+task call_mycustomtask(type: MyCustomTask) {
+  message = "This is call_mycustomtask"
+  println "${message}"
+}
+
+// or custom task can be defined in a seperate java/groovy file under buildSrc/src/main
+// as is the case with the custom task 'CustomTask'.
+
+task call_custom_task1(type: CustomTask) {
+}
+
+task call_custom_task2(type: CustomTask) {
+  message = 'This is call_custom_task1'
 }
 
 task call_custom_task3(type: CustomTask, dependsOn: call_custom_task2) {
-  username = 'exampleuser'
-  password = 'passw0rd'
-  database = 'example'
-  sql = 'CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY, username VARCHAR(100))'
+  message = 'This is call_custom_task2'
+}
+
+task call_custom_task4(type: CustomTask, dependsOn: call_custom_task3) {
+  message = 'This is call_custom_task3'
 }
