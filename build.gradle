@@ -153,14 +153,12 @@ task call_custom_task1(type: CustomTask) {
 }
 
 task call_custom_task2(type: CustomTask, dependsOn: call_custom_task1) {
-  sql = "GRANT ALL PRIVILEGES ON example.* 
-        TO exampleuser@localhost IDENTIFIED BY 'passw0rd'"
+  sql = "GRANT ALL PRIVILEGES ON example.* TO exampleuser@localhost IDENTIFIED BY 'passw0rd'"
 }
 
-task call_custom_task3(type: MySqlTask, dependsOn: call_custom_task2) {
+task call_custom_task3(type: CustomTask, dependsOn: call_custom_task2) {
   username = 'exampleuser'
   password = 'passw0rd'
   database = 'example'
-  sql = 'CREATE TABLE IF NOT EXISTS users 
-        (id BIGINT PRIMARY KEY, username VARCHAR(100))'
+  sql = 'CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY, username VARCHAR(100))'
 }
