@@ -10,4 +10,5 @@ Learning all things gradle
 - http://www.drdobbs.com/open-source/writing-build-scripts-with-gradle/240168648
 
 ####Books
-- http://gradleware.com/registered/books/building-and-testing/?
+- Building and Testing with Gradle
+	- This is a free online book: http://gradleware.com/registered/books/building-and-testing/?
