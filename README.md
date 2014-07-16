@@ -1,6 +1,13 @@
-Learning-gradle
-===============
+#Learning-gradle
 
 Learning all things gradle
 
-Website: http://www.gradle.org/
+####Useful links
+- http://www.gradle.org/
+
+####Articles
+- http://www.drdobbs.com/jvm/why-build-your-java-projects-with-gradle/240168608
+- http://www.drdobbs.com/open-source/writing-build-scripts-with-gradle/240168648
+
+####Books
+- http://gradleware.com/registered/books/building-and-testing/?
