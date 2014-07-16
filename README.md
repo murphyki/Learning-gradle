@@ -12,3 +12,5 @@ Learning all things gradle
 ####Books
 - Building and Testing with Gradle
 	- This is a free online book: http://gradleware.com/registered/books/building-and-testing/?
+- Programming Groovy
+	- Author: Venkat Subramaniam, Publisher: The Pragmatic Bookshelf
